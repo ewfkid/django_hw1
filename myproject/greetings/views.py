@@ -1,26 +1,17 @@
-from django.shortcuts import render
 
-from django.http import HttpResponse
-from .models import Greeting
+from django.shortcuts import render
 from django.utils.timezone import now
+from .models import Greeting
 
 def hello(request, name):
+    # Создаём запись в базе данных
     Greeting.objects.create(name=name, timestamp=now())
-    return HttpResponse(f"Hello, {name}!")
-
+    return render(request, 'greetings/hello.html', {'name': name})
 
 def stats(request):
     total_greetings = Greeting.objects.count()
-    return HttpResponse(f"Total greetings: {total_greetings}")
+    return render(request, 'greetings/stats.html', {'total_greetings': total_greetings})
 
 def user_stats(request, name):
     greetings = Greeting.objects.filter(name=name).order_by('-timestamp')
-
-    if not greetings.exists():
-        return HttpResponse(f"No greetings found for {name}")
-
-    response_text = f"Greetings for {name}:<br>"
-    for greeting in greetings:
-        response_text += f"{greeting.timestamp}<br>"
-
-    return HttpResponse(response_text)
+    return render(request, 'greetings/stats_by_name.html', {'name': name, 'greetings': greetings})

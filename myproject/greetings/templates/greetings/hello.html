@@ -1,0 +1,11 @@
+{% extends 'greetings/base.html' %}
+
+{% block title %}Welcome!{% endblock %}
+
+{% block content %}
+    <div class="header header-green">Welcome!</div>
+    <h2 class="text-red">Hello, {{ name }}!</h2>
+    <p>We're glad to see you here!</p>
+    <a href="{% url 'stats' %}">Go to stats</a>
+    <a href="/" class="link-green">Go back to home page</a>
+{% endblock %}
