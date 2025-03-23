@@ -3,45 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Greeting App{% endblock %}</title>
+    <title>{% block title %}Greetings App{% endblock %}</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        .header {
-            font-size: 24px;
-            font-weight: bold;
-            padding: 10px;
-            text-align: center;
-            color: white;
-        }
-        .header-red { background-color: red; } /* Красный фон для Statistics */
-        .header-green { background-color: green; } /* Зеленый фон для Welcome */
-        .text-red { color: red; } /* Красный текст (Hello, {name} и Greetings Log) */
-        .text-blue { color: blue; } /* Синий текст (Total Greetings) */
-        .link-green { color: green; text-decoration: none; } /* Зеленая ссылка */
-        .link-green:hover { text-decoration: underline; }
-        a {
-            display: block;
-            margin: 10px 0;
-        }
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .header { font-size: 24px; font-weight: bold; }
+        .stats { background: orange; color: white; padding: 10px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        {% block content %}{% endblock %}
-    </div>
+    {% block content %}{% endblock %}
 </body>
 </html>

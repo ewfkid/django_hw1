@@ -1,0 +1,21 @@
+{% extends "greetings/base.html" %}
+
+{% block content %}
+    <div class="header">Statistics</div>
+    <h3>Total Greetings: {{ total_greetings }}</h3>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Enter your name" required>
+        <button type="submit">Greet</button>
+    </form>
+
+    <h3>Users:</h3>
+    <ul>
+        {% for user in users %}
+            <li><a href="{% url 'stats' user %}">{{ user }}</a></li>
+        {% empty %}
+            <li>No greetings yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

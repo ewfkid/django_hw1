@@ -1,9 +1,7 @@
-{% extends 'greetings/base.html' %}
-
-{% block title %}Statistics{% endblock %}
+{% extends "greetings/base.html" %}
 
 {% block content %}
-    <div class="header header-red">Statistics</div>
-    <h2 class="text-blue">Total Greetings: {{ total_greetings }}</h2>
-    <a href="/" class="link-green">Go back to home page</a>
+    <h2>Statistics for {{ name }}</h2>
+    <p>Total Greetings: {{ count }}</p>
+    <a href="{% url 'index' %}">Back to Home</a>
 {% endblock %}

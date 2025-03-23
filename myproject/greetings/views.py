@@ -1,17 +1,21 @@
-
 from django.shortcuts import render
-from django.utils.timezone import now
-from .models import Greeting
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
-def hello(request, name):
-    # Создаём запись в базе данных
-    Greeting.objects.create(name=name, timestamp=now())
-    return render(request, 'greetings/hello.html', {'name': name})
+greetings_data = {}
 
-def stats(request):
-    total_greetings = Greeting.objects.count()
-    return render(request, 'greetings/stats.html', {'total_greetings': total_greetings})
+def index(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        if name:
+            greetings_data[name] = greetings_data.get(name, 0) + 1
+            return HttpResponseRedirect(reverse("stats", args=[name]))
 
-def user_stats(request, name):
-    greetings = Greeting.objects.filter(name=name).order_by('-timestamp')
-    return render(request, 'greetings/stats_by_name.html', {'name': name, 'greetings': greetings})
+    return render(request, "greetings/index.html", {
+        "total_greetings": sum(greetings_data.values()),
+        "users": greetings_data.keys(),
+    })
+
+def stats(request, name):
+    count = greetings_data.get(name, 0)
+    return render(request, "greetings/stats.html", {"name": name, "count": count})
