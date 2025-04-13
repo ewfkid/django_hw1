@@ -1,0 +1,20 @@
+{% extends 'books/base.html' %}
+{% block content %}
+<h2>Ваши книги</h2>
+<a href="{% url 'book_add' %}" class="btn btn-primary mb-3">Добавить книгу</a>
+<div class="row">
+    {% for book in books %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <img src="{{ book.cover.url }}" class="card-img-top" alt="{{ book.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <a href="{% url 'book_detail' book.pk %}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>Вы ещё не добавили книги.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'books/base.html' %}
+{% block content %}
+<h2>{{ book.title }}</h2>
+<img src="{{ book.cover.url }}" class="img-fluid mb-3" style="max-height: 400px;">
+<p><strong>Автор:</strong> {{ book.author }}</p>
+<p><strong>Описание:</strong> {{ book.description }}</p>
+<p><strong>Дата публикации:</strong> {{ book.publication_date }}</p>
+{% if user == book.owner %}
+    <a href="{% url 'book_edit' book.pk %}" class="btn btn-warning">Редактировать</a>
+    <a href="{% url 'book_delete' book.pk %}" class="btn btn-danger">Удалить</a>
+{% endif %}
+{% endblock %}

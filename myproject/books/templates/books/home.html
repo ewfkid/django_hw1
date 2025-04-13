@@ -1,0 +1,22 @@
+{% extends 'books/base.html' %}
+{% block content %}
+<h2>Все книги</h2>
+<form method="get" class="mb-3">
+    <input type="text" name="q" placeholder="Поиск по названию" class="form-control" value="{{ request.GET.q }}">
+</form>
+<div class="row">
+    {% for book in books %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <img src="{{ book.cover.url }}" class="card-img-top" alt="{{ book.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <a href="{% url 'book_detail' book.pk %}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>Нет доступных книг.</p>
+    {% endfor %}
+</div>
+{% endblock %}
